@@ -1,0 +1,213 @@
+
+Create database db_supermarket
+
+use db_supermarket
+
+Create table ProductCategory
+(
+catid int,
+catname varchar(30),
+[desc] varchar(300),
+[status] bit
+
+)
+
+create table Product
+(
+	pid int,
+	catid int,
+	pname varchAR(30),
+	pprice INT,
+	sprice INT,
+	[status] BIT
+)
+
+Create table country
+(
+cid int,
+canme varchar(30),
+[status] bit
+)
+
+-- Customer table
+
+Create table Customer
+(
+    custid INT,
+	fname  VARCHAR(100),
+	lname VARCHAR(30),
+	emailid  VARCHAR(50),
+	phoneno  VARCHAR(15), --+91-
+	[address]  VARCHAR(50),
+	cid			INT,
+	account_create_date DATETIME
+)
+--Stock
+
+Create table Stock
+(
+    [sid] INT,
+	pid  INT,
+	[datE]  DATETIME,
+	quantity INT,
+	price  INT
+)
+
+-- Salesorder
+
+Create table Salesorder
+(
+[sid] INT,
+	pid  INT,
+	[datE]  DATETIME,
+	quantity INT,
+	price  INT
+)
+----- Inserting Data into Tables
+Insert into ProductCategory
+values(1,'Electronics','NA',1)
+
+-- Single record
+Select * from  ProductCategory
+
+-- Multiple Records
+
+Insert into ProductCategory
+
+values
+(2,'Food','NA',1),
+(3,'Access','NA',1),
+(4,'Machine','NA',1),
+(5,'Computer','NA',1)
+
+--Another Method by Select insted of Values
+
+Insert into ProductCategory
+Select 6,'Grocessary','NA',1
+
+Select 7,'Automobile','NA',1
+
+Delete from ProductCategory where catname = 'Grocessary'
+
+Insert into ProductCategory
+Select 7,'Automobile','NA',1
+Union 
+Select 8,'beverages','NA',1
+Union
+Select 9,'Drinks','NA',1
+
+Insert into Product
+values(101,1,'mobile',4000,2000,1),
+(102,2,'Biscuits',50,45,1),
+(103,3,'headphone',200,100,1),
+(104,4,'refrigator',7000,6200,1)
+
+Select * from ProductCategory
+
+Select * from Product
+
+Insert into Country
+Values 
+(501,'France',1),
+(502,'Paris',1),
+(503,'London',1),
+(504,'Australia',1),
+(505,'Canada',1)
+
+Select * From ProductCategory
+Select * from product
+Select * from Country
+
+--data type
+
+numeric
+-------------
+tinyint		: 1
+int		: 33			: 4 byte
+bigint	: 4444			: 8 byte
+
+float		: decimal 11.222		: 7 decimal position 
+double		: decimal 34333.33434   : 16 decimal position 
+
+alpha numeric
+-----------------
+char		: char(10)  - fix size 'ab'  / ascii /english
+nchar		: nchar(10) - fix size : unicode  / multi lan	gauge
+varchar		: varchar(10) - dynamic size
+					    ='ab' 8 char will be freed 
+nvarchar	: multi language	
+text		: tags and file format 
+			<id> 11 </id>
+					{name: "John", age: 31, city: "New York"};
+
+ntext		: multi language 
+
+
+date time
+-----------
+date  : yyyy-mm-dd
+datetime : yyyy-mm-dd hh:mm
+smalldatetime : yyyy-mm-dd hh:mm:ss:mis
+
+
+bit  : 1 or 0
+----- 
+
+other
+---------------
+varbinary
+currency 
+image
+
+***note : all data should be '' / single quoted 
+	except numeric, and bit 			
+
+
+--constraints : is rules and regulation or properties of column
+--------------------
+There are following constraints:
+-primary key: 
+			-no duplicate
+			-not null
+			-single on a table 
+-foreign key:
+			-is referenctial column from fist table to another table
+			example:
+					employee:
+							eid (pl)
+
+					sal
+						eid (fk)
+-unique
+			-no duplicate
+			-allow single null
+			
+-not null
+			-mandat field or column
+-null
+-check
+			-allow from given list 
+-default 
+			--set value automatically when data is not given by user
+
+
+--
+create table testtable
+(
+eid int primary key,
+fname varchar(100) not null,
+lame varchar(30) null,
+email varchar(30)    unique,
+gender  char(1) check (gender in('m','f')),
+status  int  default 1,
+time_stamp datetime default getdate()
+)
+   
+
+insert into testtable(eid,fname,email,gender)
+values(20,'raman',null,'m')
+
+select * from testtable
+
+
+
