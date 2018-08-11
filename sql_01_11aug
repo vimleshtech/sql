@@ -1,0 +1,96 @@
+-- comment line 
+-- create database
+create database db_supermaket;
+
+--switch database 
+use db_supermaket
+
+
+-- create table
+create table ProductCategory
+(
+	catid int,
+	catname varchar(30),
+	[desc]	varchar(300),
+	[status]  bit 
+)
+
+
+--
+
+create table Product
+(
+	pid int,
+	catid int,
+	pname varchAR(30),
+	pprice INT,
+	sprice INT,
+	[status] BIT
+)
+
+---
+CREATE TABLE Country
+(
+	cid INT,
+	cname VARCHAR(40),
+	[status]  BIT
+)
+
+---
+CREATE TABLE Customer
+(
+	custid INT,
+	fname  VARCHAR(100),
+	lname VARCHAR(30),
+	emailid  VARCHAR(50),
+	phoneno  VARCHAR(15), --+91-
+	address  VARCHAR(50),
+	cid			INT,
+	account_create_date DATETIME
+)
+
+---	
+CREATE TABLE Stock
+(
+	[sid] INT,
+	pid  INT,
+	[datE]  DATETIME,
+	quantity INT,
+	price  INT
+)
+-----	
+CREATE TABLE SalesOrder 
+(
+	oid  INT,
+	custid INT,
+	pid   INT,
+	quantity  INT,
+	[date] DATETIME
+)
+
+
+INSERT INTO ProductCategory
+VALUES(1,'Electronic','na',1)
+
+--multi rows insert 
+INSERT INTO ProductCategory
+VALUES
+(2,'food','na',1),
+(3,'acces.','na',1),
+(4,'machine','na',1),
+(5,'computer','na',1)
+
+
+-- 
+INSERT INTO ProductCategory
+select 6,'test','na',1
+
+INSERT INTO ProductCategory
+select 7,'test','na',1
+union 
+select 8,'test','na',1
+union 
+select 9,'test','na',1
+
+
+select * from ProductCategory
