@@ -1,0 +1,161 @@
+nakulgrover20@gmail.com
+
+Terms:
+===========================
+DBMS  : database management system 
+      : collection of data in tabular format (file system)
+	-MS Excel
+	-MS Access 
+	-Foxpro
+	etc.	
+		
+RDBMS : relational database management system
+      : collection of data in tabular format with constraints and relationship 
+      : and collection of different types of objects
+		-function
+		-procedure
+		-trigger
+		-cursor 
+		etc.
+	: RDBMS works on client -server architecture 
+	:There are following tools
+		-MS SQL SERVER   *
+		-ORACLE
+		-MY SQL SERVER	*
+		-MONGODB
+		-IBMDB2
+		etc.
+
+
+
+SQL : structual query language (to manage and process the database schema and data)
+------------------
+Schema: is group of objects (and its structure)
+
+
+TL-SQL	: transactional structural query language (MS SQL SERVER)
+PL-SQL	: procedural structural query language    (ORACLE)
+
+
+MS SQL SERVER
+-----------------------
+Client-Server Arichitecture
+
+SSMS : SQL server management studio 
+Server : Edtions:
+
+	-Express	: free
+	-Professional   : paid
+	-Enterprise 	: paid  **
+	-Developer edition 
+
+
+Server Type		: SQL db Engine   *
+			MS BI 
+			: SSIS  /ETL 
+			: SSRS
+			: SSAS 
+Server/Instance		: IP ADDRESS OR COMPUTER NAME /INSTANCE NAME 
+Authentication Type	: 1. WINDOWS 
+					There is no id and pwd required 
+			  2. SQL 
+					id and pwd will be required 
+
+	
+SuperStore
+=====================
+Tables:
+---------------
+ProductCategory
+Product
+Country
+Customer
+Stock
+SalesOrder 
+
+
+ProductCategory:
+	columns
+	-----------
+	catid 
+	catname
+	desc
+	status
+
+
+
+Product:
+	pid
+	catid 
+	pname
+	pprice
+	sprice
+	status
+
+	
+
+Country:
+	cid
+	cname
+	status 
+
+
+Customer:
+	custid
+	fname
+	lname
+	emailid
+	phoneno
+	address
+	cid 
+	account_create_date
+
+	
+Stock:
+	sid
+	pid 
+	date
+	quantity
+	price 
+	
+SalesOrder :
+	oid
+	custid
+	pid 
+	quantity 
+	date
+
+SQL Command Type
+======================
+DDL	: data definition langauge
+	-create		: create new object
+	-alter 		: modify structure of object
+	-drop 		: remove object
+	-truncate 	: vacant table/remove all rows but structure will remain same
+
+DML	: data manipulation langauge
+	-insert		: save data 
+	-update		: modify value 
+	-delete		: remove rows with condition or  without condition 	
+DCL	: data control langauge
+	-create user
+	-grant access
+	-revoke access	
+TCL	: transaction control language
+	-begin transaction 
+	-commit 
+	-rollback 
+DQL	: data query language 
+	-select 
+
+
+**Database: is relational schemal (group of objects) where data can be stored in 
+
+tabular format 
+create database db_supermaket;
+
+
+
+
+
+
