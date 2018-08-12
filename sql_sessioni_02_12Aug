@@ -1,0 +1,329 @@
+-- comment line--- 
+-- create database
+create database db_supermaket;
+
+--switch database 
+use db_supermaket
+
+
+-- create table
+create table ProductCategory
+(
+	catid int,
+	catname varchar(30),
+	[desc]	varchar(300),
+	[status]  bit 
+)
+
+
+--
+
+create table Product
+(
+	pid int,
+	catid int,
+	pname varchAR(30),
+	pprice INT,
+	sprice INT,
+	[status] BIT
+)
+
+---
+CREATE TABLE Country
+(
+	cid INT,
+	cname VARCHAR(40),
+	[status]  BIT
+)
+
+---
+CREATE TABLE Customer
+(
+	custid INT,
+	fname  VARCHAR(100),
+	lname VARCHAR(30),
+	emailid  VARCHAR(50),
+	phoneno  VARCHAR(15), 
+	[address]  VARCHAR(50),
+	cid			INT,
+	account_create_date DATETIME
+)
+
+---	
+CREATE TABLE Stock
+(
+	[sid] INT,
+	pid  INT,
+	[date]  DATETIME,
+	quantity INT,
+	price  INT
+)
+-----	
+CREATE TABLE SalesOrder 
+(
+	oid  INT,
+	custid INT,
+	pid   INT,
+	quantity  INT,
+	[date] DATETIME
+)
+
+
+INSERT INTO ProductCategory
+VALUES(1,'Electronic','na',1)
+
+--multi rows insert 
+INSERT INTO ProductCategory
+VALUES
+(2,'food','na',1),
+(3,'acces.','na',1),
+(4,'machine','na',1),
+(5,'computer','na',1)
+
+
+-- 
+INSERT INTO ProductCategory
+select 6,'test','na',1
+
+INSERT INTO ProductCategory
+select 7,'test','na',1
+union 
+select 8,'test','na',1
+union 
+select 9,'test','na',1
+select * from ProductCategory
+select * from Product
+insert into Product
+values
+(001,01,'shop',50,60,1),
+(002,02,'facewash',100,150,1)
+select * from Product
+insert into product
+select 003,03,'shampoo',40,50,1
+
+select 004,04,'clothwash powder',120,150,1
+
+select * from Stock
+insert into Stock
+-- 111,001,11-08-2018,10,200,
+values (333,003,1-01-2018,200,500),
+       (222,002,12-08-2018,50,500)
+
+select * from Country
+insert into Country
+select 1,'Akki',1
+union
+select 2,'bb',1
+union
+select 3,'cc',1
+
+select * from Customer
+insert into Customer
+Values
+(001,'a','b','cv@gmail.com','d','12cv',1,11-05-2018
+)
+
+
+----
+
+create database db_hrms
+use db_hrms
+
+create table employee
+(
+emp_id int identity(1,1) primary key,
+fname varchar(30) not null,
+lname varchar(30) null,
+emailid varchar(100) unique,
+status   bit default 1 ,
+gender   char(1)  check (gender in('m','f')),
+created_date datetime default getdate()
+)
+
+create table salary 
+(
+id  int identity(1,1) primary key,
+eid  int foreign key references employee(emp_id),
+basic int,
+hra int
+)
+
+insert into employee(fname,emailid,gender)
+values('raman','raman@gamil.com','m'),
+('jatin','jatin@gamil.com','m'),
+('divya','divya@gamil.com','f'),
+('ayush','ayush@gamil.com','m')
+
+select * from employee
+insert into salary(eid,hra,basic)
+values(2,20000,40000)
+
+insert into salary(eid,hra,basic)
+values(3,30000,60000)
+
+select * from salary
+--select * from employee
+--update
+update employee 
+set lname ='sharma'
+where emp_id =1
+
+
+
+update employee 
+set lname ='sinha',emailid='sinha11@gmail.com'
+where emp_id =2
+
+--delete rows 
+--delete selected rows 
+delete from employee where emp_id=1
+
+select * from employee
+--delete all rows 
+delete from employee
+
+
+---
+---keywords
+--into: copy data from existing table into new table
+	-- make a new copy from existing table 
+select * into newtable from employee
+select * from newtable
+
+select emp_id,fname,emailid into tbl2 from employee
+select * from tbl2
+
+select * into tbl3 from employee
+where emp_id >2
+
+select * from tbl3
+
+-- 	as : create alias , rename the in query (output)
+-- as is optional 
+select 
+		  emp_id  employee_id
+		 ,fname +lname as fullname
+		 ,gender as sex 
+ from employee
+
+-- show select given rows from table 
+
+select top 2 * from employee
+
+
+--case : is conditioal statement 
+select 
+	emp_id,
+	fname,
+	lname,
+	emailid,
+	case when gender ='m'
+		 then 
+				'male'
+		else 
+				'female'
+		end 
+		as gender
+from employee
+
+select 
+	emp_id,
+	fname,
+	lname,
+	emailid,
+	case when gender ='m'
+		 then 
+				'male'
+		else case when gender='f'
+			then 
+				'female'
+			else 
+				'other'
+
+		end 
+		end
+		as gender
+from employee
+
+
+--select to rows 
+-- -where clause: is condtion  to filter the rows
+
+select * from employee
+where gender='m'
+
+select * from employee
+where emp_id>3
+
+
+select * from employee
+where emp_id=3
+
+select * from employee
+where emp_id in (3,4,5)
+
+
+select * from employee
+where emp_id not in (3,4,5)
+
+
+
+select * from employee
+where emp_id between 1 and 3
+
+
+select * from employee
+where emp_id not between 1 and 3
+
+
+select * from employee
+where emp_id >3 and gender ='m'
+
+
+select * from employee
+where emp_id >3 or gender ='f'
+
+--- -order by	(sorting) : arrange data in acending or decending order
+--defaul is asc
+select * from employee
+order by fname desc
+
+select * from employee
+order by fname asc 
+
+select * from employee
+order by gender asc ,  fname desc
+
+
+select * from employee
+order by 2 asc 
+
+select top 2 * from employee
+order by emp_id desc 
+
+
+--aggregiate function
+select max(emp_id) from employee
+select min(emp_id) from employee
+select sum(emp_id) from employee
+select avg(emp_id) from employee
+select count(emp_id) from employee
+
+
+-- -group by : summarize the data 
+select gender , count(gender)
+from employee
+group by gender   
+
+select gender , count(gender),sum(emp_id)
+from employee
+group by gender   
+
+
+---having : apply condition after group by
+--having can be used only with group by
+select gender , count(gender),sum(emp_id)
+from employee
+group by gender   
+having count(gender)>1
+
