@@ -1,0 +1,123 @@
+Data Model: is also known and relationship between two objects and associations
+=============================
+Associations or mode type:
+
+1. 
+
+1:1		- one to one  (one parent and one child)
+	employee:
+		eid, fname , lname
+		1    raman   sinha
+		2    nitin  sharma
+
+	salary :
+		sid, eid   hra   basic 
+		11   , 1   44344  45555
+		12   , 2   555    5555
+
+2.
+1:M		- on eto many  (one parent and multiple child)
+		
+		employee:
+		eid, fname , lname
+		1    raman   sinha
+		2    nitin  sharma
+
+
+
+		attendance
+			atid   eid   date   status
+			111	1    1-aug   P
+			112     1    2-aug   A
+
+3. 
+M:1		- many to one relationship 
+		
+		
+
+
+4. 
+
+M:M 		- many to many 
+
+		employee:
+		eid, fname , lname
+		1    raman   sinha
+		2    nitin  sharma
+
+
+
+		project
+			pid  pname 
+			111  HDFC Bank Ltd.
+			233  ICICI ...
+
+
+
+
+		ProjectAllocation
+			palid 	pid  eid    startdate  enddate
+			1      111   1     
+			2      111   2 
+			3      3333  1 
+
+
+=====================================
+Example:
+
+CourceType :
+	ctypeid(pk-unique)   name  status
+	
+	1		Weekend
+	2		Regular
+			Alternate
+			FastTrack
+			ProjectBased
+	
+Course
+	cid(pk-unique)    cname   statuc 
+
+	1	Angular
+	2	Salesfoce
+		Java
+		...
+		..
+
+Student:
+	sid(pk-unique)   sname emailid  phoneno  gender address    
+	1	raman .... ...				
+Faculty
+	fid(pk-unique)  fname  emailid phoneno gender 
+
+StudnetEnrollment
+	enrollid(pk-unieque     sid(lookup/fk/lookup)     cid(fk)  typeid(fk)   startdate    fee
+	1            		1        		  3     		...
+	2             		1       		  1      		...
+	
+
+FacultyCourseMapping
+	fcid	 fid(fk) 		cid(fk) 
+	100	  1  			2
+	101	  2			1
+
+
+=============================
+Database : applications   : erp_app
+Tables:
+	6 tables
+	
+SQL : structural query language 
+	SQL Command Type
+	-DDL : data defintion language
+		-create 
+		-alter
+		-drop
+		-truncate 
+	-DML : data manipulation language
+	-TCL : transaction control language
+	-DCL  : data control langauge
+	-DQL  : data query language 
+
+
+
+	   								
