@@ -1,0 +1,89 @@
+
+
+create database erp_app;
+
+use erp_app;
+
+
+create table CourseType
+(
+ct_id		int auto_increment primary key,
+ct_name 	varchar(100),
+ct_status	char(1)
+);
+
+
+create table Course
+(
+c_id		int auto_increment primary key,
+c_name 		varchar(100),
+c_status	char(1)
+);
+
+
+create table Student
+(
+s_id		int auto_increment primary key,
+s_name 		varchar(100),
+s_email	   varchar(100),
+s_phone    varchar(30),
+s_gender    varchar(10),
+s_address   varchar(300),
+s_status	varchar(10)
+);
+
+
+create table Faculty
+(
+f_id		int auto_increment primary key,
+f_name 		varchar(100),
+f_email	   varchar(100),
+f_phone    varchar(30),
+f_gender    varchar(10),
+f_address   varchar(300),
+f_status	varchar(10)
+);
+
+create table StudnetEnrollment
+(
+en_id		int auto_increment primary key,
+s_id		int,
+c_id		int,
+ct_id		int,
+start_date	datetime,
+fee			int,
+end_date	datetime,
+status		char(100)
+);
+
+
+
+alter table StudnetEnrollment
+add constraint fk_s_id foreign key(s_id) references Student(s_id)
+
+
+
+alter table StudnetEnrollment
+add constraint fk_c_id foreign key(c_id) references Course(c_id)
+
+alter table StudnetEnrollment
+add constraint fk_ct_id foreign key(ct_id) references coursetype(ct_id)
+
+
+
+create table FacultyCourseMapping
+(
+fcmap_id		int auto_increment primary key,
+f_id		int,
+c_id		int
+);
+
+
+
+alter table FacultyCourseMapping
+add constraint fk_f_id foreign key(f_id) references faculty(f_id)
+
+
+alter table FacultyCourseMapping
+add constraint fk_cc_id foreign key(c_id) references course(c_id)
+
