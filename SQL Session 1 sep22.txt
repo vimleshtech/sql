@@ -1,0 +1,93 @@
+SQL(Structured Query Language)
+Types of command:
+1.DDL(DAta Definition Language)		Create,Alter,Drop,Truncate
+2.DML(Data Manipulation Language)	Select,Insert,Update,Delete
+
+
+--creating database--
+create database dbname
+
+
+use dbname
+
+
+--creating table--
+create table tbname(
+colname datatype,
+colname datatype)
+
+
+--inserting records--
+insert into tbname values()
+
+*varchar,date,datetime values will be in ' '
+**date format for inserting records will be 'mm-dd-yyyy'
+
+
+--updating records--
+update tbname set colname=new_value 
+
+update tbname set colname=new_value where unique_colname=value
+
+
+--delete--
+delete from tbname
+
+delete from tbname where unique_colname=value
+
+
+--Alter--
+1.Alter for adding a column
+alter table tbname add colname datatype
+
+
+2.Alter for modifying a column
+alter table tbname alter column colname datatype
+
+
+3.Alter for dropping a column
+alter table tbname drop column colname
+
+
+
+--drop--
+1.Dropping Database
+drop database dbname
+
+
+2.Dropping Table
+drop table tbname
+
+
+--Truncate--
+truncate table tbname
+
+
+
+------------------------------------------------------------
+create database test
+
+use test
+
+create table emp(
+id int,
+name varchar(40),
+dob date,
+age int)
+
+select * from emp
+
+insert into emp values(1,'aman','08-31-1993',25)
+
+insert into emp values(2,'mohit','07-11-1997',21)
+
+update emp set name='rohit' where id=2
+
+
+delete from emp where name='mohit'
+
+alter table emp add gender varchar(1)
+
+alter table emp alter column gender varchar(6)
+
+alter table emp drop column gender
