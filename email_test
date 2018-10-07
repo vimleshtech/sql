@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+using System.Net.Mail;
+
+namespace test
+{
+    public class Emailer
+    {
+        //Boolean isTestEnvironment = false;
+        
+        
+        public void SendMail( string strDate,string strAmmount)
+        {        
+            string strServerName = string.Empty, strServerPort = string.Empty, strSMTPServer = string.Empty, strEmailFrom = string.Empty, strBCCEmail = string.Empty,
+                    strIsDevelopment = string.Empty, strIsBCCRequired = string.Empty, strURI = string.Empty;
+
+            //Emailing
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("gsd_command_center@uhc.com");
+
+          
+            message.CC.Add("abc@gmail.com");
+            
+            message.Subject = "test";
+
+            message.Body = "hi";
+
+            message.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient("abd.u.com");       
+            smtp.Send(message);
+        }
+        
+        }
+        
+        }
