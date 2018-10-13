@@ -1,0 +1,243 @@
+/*
+Data Type
+==============================
+tinyint			: 2 byte		
+int				: 4 byte
+bigint			: 8 byte
+
+float			: 4 byte
+double			: 8 byte 
+numeric(5,2)	: 123.45
+
+
+Note : n  - unicode (multiple language)
+	 : n - unicode will take double size 
+
+char			: fix size , ASCII (english)			
+				: example:
+						char(10)  ='abc'  , rest 7 char will not be free
+nchar			: fix size , Unicode (all languages)
+						nchar(10)  =n'abc'  , rest char will not be free
+varchar			: dynamic size  - ASCII (english)
+						varchar(100)   ='abcd'   --except 4 rest size will be free		
+nvarhcar		: dynamic size  - Unicode (multiple language)
+						nvarchar(100)   =n'abcd'   --except used size, rest size will be free		
+text			:
+					dynamic size  - ASCII	
+ntext			:	
+					dynamic size - Unicode 
+
+date			: yyyy-mm-dd
+datetime		: yyyy-mm-dd hh:mm:ss:mis 
+smalldatetime	: yyyy-mm-dd hh:mm
+
+bit				:  1  - true , 0 - false
+varbinary(max)	: 
+currency		
+etc.
+
+*/
+
+create table product_info
+(
+id int identity(100,2) ,		--auto increment start from 1 and incremenet by 1
+name nvarchar(10),
+dob date,
+time_stamp smalldatetime
+)
+alter table product_info
+add ts datetime
+
+
+insert into product_info
+values('raman','2018-10-13 11:22:11:333','2018-10-13 11:22:11:333','2018-10-13 11:22:11:333')
+
+select * from product_info
+
+/*
+Constrains:  is property of column or attribute 
+===================
+There are following constraints in ms sql server:
+
+-primary key
+			-no duplicate 
+			-not null
+			-physically sorted 
+			-single primary key can be created on a table 
+-foreign key
+			-is referenctial column from other table (only primary key can be reffered as foreign key)
+			-null is allowed
+			-duplicate value is allowed
+			-only referential value is allowed 	
+-unique
+			-no duplicate 
+			-single null 
+				
+
+-not null
+			-madatory field , empty/blank value is not allowed
+-null
+			-optional field , empty/blank value is allowed 
+-check
+			-value allowed from given list 
+			
+-default 
+			-set/insert value automatically when data is not passed by user or in a query
+
+*/
+
+drop table emp
+
+create table emp
+(
+eid int primary key,
+fname varchar(100) not null,
+lname  varchar(40) null,
+emailid   varchar(40) unique,
+gender   char(1)    check (gender in ('m','f')),
+time_stamp   datetime	default getdate()
+)
+
+insert into emp (eid,fname,gender)
+values(11,'raman','m')
+
+insert into emp (eid,fname,emailid,gender)
+values(111,'monika','monika@gmail.com','f')
+
+
+select * from emp 
+
+drop table sal 
+
+create table sal
+(
+eid int foreign key references  emp(eid),
+bsal int not null,
+hra   int null,
+da   int null
+)
+
+
+alter table sal 
+add constraint fk_abcd foreign key(eid) references emp(eid)
+
+insert into sal 
+values(1,4444444)
+
+insert into sal(sal) 
+values(4444444)
+
+select * from sal 
+
+/*
+keywords:
+----------------
+identity 
+distinct
+top 
+into 
+case when 
+*/
+
+select * from emp 
+
+select 
+eid ,
+fname 
+lname ,
+case when gender ='m'
+	 then 
+			'male'
+	 else 
+			'female'
+	end as gender 
+from emp 
+--------------------------
+
+select eid, fname+lname as fullname from emp 
+--or
+select eid, concat(fname,lname) as fullname from emp 
+
+select eid, fname+isnull(lname,'') as fullname from emp 
+
+
+/*
+Functions
+--------------------------
+Types of functions
+i. Scaler 
+		-return single value
+ii. Aggregiate
+		-works on a column and return single value 
+		-there are following functions
+			max()
+			min()
+			sum()
+			count()
+			avg()
+iii. Tabular 
+		-return table value 
+
+
+Text Function
+===================
+upper()
+lower()
+left()
+right()
+len()
+replace()
+ltrim()
+rtrim()
+charindex()
+substring()
+etc.
+
+Maths function
+====================
+sum()
+max()
+min()
+pow()
+sqrt()
+round()
+pi()
+stdev..()
+etc.
+
+
+Date Functions
+=================
+getdate()
+datepart()
+dateadd()
+day()
+month()
+year()
+isdate()
+datediff()
+etc.
+*/
+
+select getdate()
+select datepart(yyyy, getdate())
+select datepart(DAY, getdate())
+select datepart(DAYOFYEAR, getdate())
+select datepart(WEEK, getdate())
+select datepart(WEEKDAY, getdate())
+select datepart(QUARTER, getdate())
+select DATEADD(mm,10,getdate())
+
+select day(getdate())
+select isdate(getdate())
+
+select datediff(yyyy,'1990-10-22',getdate())
+select datediff(DAY,'1990-10-22',getdate())
+select datediff(HOUR,'1990-10-22',getdate())
+
+/*
+q. WAS to show list of employee whose bday will come in next 7 days
+q. WAS to generate grade card 
+		id  name hs es cs ms  total? avg?  grade?
+		1    raman 88 99  44
+*/
