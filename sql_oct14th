@@ -1,0 +1,247 @@
+
+/*
+Union
+Union all
+intersect
+minus
+joins
+
+
+Union : to merge two or more than two tables
+      : return distict rows(unique rows)
+	  : table structure(select statemenet) should be same and data type should be same
+union all: to merge two or more than two tables
+		: return all rows from both the tables 
+
+		
+*/
+
+select 1 as id , 'raman' as msg 
+union 
+select 2 as id , 'divya' as msg 
+union 
+select 1 as id , 'raman' as msg 
+union 
+select 3 as id , 'monika' as msg 
+
+
+select 1 as id , 'raman' as msg 
+union  all
+select 2 as id , 'divya' as msg 
+union all
+select 1 as id , 'raman' as msg 
+union all
+select 3 as pid , 'monika' as msg 
+
+
+
+select * into temp_2  from 
+				(
+				select 11 as id , 'raman' as msg 
+				union  all
+				select 2 as id , 'divya' as msg 
+				union all
+				select 111 as id , 'raman' as msg 
+				union all
+				select 3 as id , 'monika' as msg 
+				) t
+
+select * from temp
+union 
+select 11 
+
+
+select id from temp
+union 
+select 11 
+
+
+--
+select count(*) from temp	  --count of rows 
+select count(msg) from temp   --count of values (ignore blank/empty)
+ 
+
+
+/*
+-- intersect  : return common/matching rows 
+			  : table structure must be same 
+--  minus	/except  : return uncommon/unmatch rows 
+
+*/
+
+
+select * from temp 
+intersect
+select * from temp_2   
+
+--intersect
+select * from temp 
+intersect
+select id as i, msg  from temp_2   
+
+--minus /except
+select * from temp 
+except 
+select *  from temp_2   
+
+
+
+/*
+joins : to merge two or more than two tables horizentally 
+      : at least one column be same logically in sources
+There are following types of join:
+	i. inner join   / default join / equi join 
+				-return common or matching rows 
+	ii. outer join	/ full outer join 
+				-return all rows from both tables 
+			a. left join / left outer join 
+				-return all rows from left table and matching from right table
+			b right join / right outer join
+				-return all rows from right table and matching from left table 
+		
+other join:
+	i. cross join / cartisan product
+	ii. self join 
+	iii. refferetial join 
+*/
+use hrms_ex
+
+select * from employee
+select * from salary
+
+
+insert into  salary
+values(100,224444,33333)
+
+
+--i. inner or default or equi 
+select e.eid,e.fn,e.ln,s.hra 
+from employee e join salary s 
+	on e.eid = s.employeeid
+
+
+select e.eid,e.fn,e.ln,s.hra 
+from employee e inner join salary s 
+	on e.eid = s.employeeid
+
+select e.eid,e.fn,e.ln,s.hra 
+from employee e join salary s 
+	on e.eid = s.employeeid
+		and s.hra > 5000
+
+--ii. full outer join 
+select e.eid,e.fn,e.ln,s.hra 
+from employee e full join salary s 
+	on e.eid = s.employeeid
+
+select e.eid,e.fn,e.ln,s.hra 
+from employee e full outer join salary s 
+	on e.eid = s.employeeid
+
+
+--left 
+select e.eid,e.fn,e.ln,s.hra 
+from employee e left join salary s 
+	on e.eid = s.employeeid
+
+
+--right 
+select e.eid,e.fn,e.ln,s.hra 
+from employee e right join salary s 
+	on e.eid = s.employeeid
+
+
+-- cross  join 
+select * from employee, salary 
+where employee.eid = salary.employeeid 
+
+
+flight
+---
+fid   seats
+1
+2
+3
+
+location 
+--
+lid   name 
+1
+2
+3
+4
+
+mapping
+-----
+mpid  fid lfromdi toid 
+1     2    1        3
+2     2    1        3
+3     2    1        3
+
+     
+
+-
+eid  ename mgrid
+1   raman   null
+2   nitin   1
+3    monika  1
+4  ayush    2
+
+
+create table emp
+(
+eid int,
+ename varchar(100),
+mgrid int
+)
+
+insert into emp 
+values(1,'raman',null),
+	(2,'nitin',1),
+	(3,'monika',1),
+	(4,'ayush',2)
+
+
+select * From emp 
+
+--  output: eid  ename  mgrname 
+
+select e.eid, e.ename, m.ename as mgrname 
+from emp as e left join emp as m 
+		on e.mgrid = m.eid  
+
+
+
+------------------
+
+Q. 
+tbl-master 
+----
+eid  fname   lname  gender 
+1    raman	  null
+2    jatin    null 
+3    divya
+
+
+temp table
+-------------
+eid  fname  lname 
+2     jatin sharma 
+11   nitisha srivastava
+12   kshitiz  johar 
+
+update u 
+set u.fname = t.fname ,
+    u.lname = t.lname 
+from tbl_master u inner join temp_table t
+	on u.eid = t.eid 
+
+
+insert into tbl_master(eid,fname,lname)
+select t.eid,t.fname,t.lname 
+from temp_table t  left join tbl_master m 
+		on  t.eid  =u.eid 
+where m.eid is null
+
+
+
