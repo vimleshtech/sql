@@ -1,0 +1,6 @@
+Delete Row
+Proper case
+Like 
+Ram sal  = 
+	all emmployee with same salary
+	
