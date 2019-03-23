@@ -1,0 +1,56 @@
+Job Profile
+
+BA/MIS				1.
+=============================
+	-Excel
+	-MS Access
+	-SQL 
+
+=================
+MS SQL Dev
+	-DB Server / Engine 
+=================
+MS SQL DBA
+	-DB Server / Engine 
+	-ETL / SSIS
+	
+
+BI
+=============================
+	-Database Engine
+	-SSIS
+		-SSRS	
+	-SSAS
+
+BI + Reporting Analyst		1.
+==========================
+	-SQL
+	-SSRS 
+	-Tableau / PowerBI 
+	
+
+DataAnalytics/DataScience/MachineLearning
+=====================
+
+	-Python
+	-RLanguage
+	-BigData Hadoop 
+
+AI/DeepLearning
+=====================	
+	-Python
+
+
+--RENAME TABLE
+exec sp_rename 'customer','newe_customer'
+--RENAME COLUM
+exec sp_rename 'customer.old_col','new-col','column'
+
+--RENAME PROC
+exec sp_rename 'OLDNAME','new-NAME'
+
+--CHANGE COL SIZE
+ALTER TABLE CUSTOMER
+ALTER COLUMN NAME VARCHAR(200)
+
+	
