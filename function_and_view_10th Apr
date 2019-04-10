@@ -1,0 +1,143 @@
+use hrms
+
+CREATE TABLE USERS
+(
+ID INT IDENTITY(1,1) PRIMARY KEY,
+NAME VARCHAR(100),
+EMAIL VARCHAR(100),
+PWD VARCHAR(40)
+)
+
+CREATE TABLE USERS_LOG
+(
+ID INT ,
+NAME VARCHAR(100),
+EMAIL VARCHAR(100),
+PWD VARCHAR(40),
+ACTION_TYPE VARCHAR(20),
+DATE_TIME DATETIME DEFAULT GETDATE()
+)
+
+CREATE TRIGGER TRG_UPDATE 
+ON USERS 
+AFTER INSERT,UPDATE 
+AS 
+BEGIN
+
+		INSERT INTO USERS_LOG(ID,NAME,EMAIL,PWD,ACTION_TYPE)
+		SELECT ID,NAME,EMAIL,PWD,'IN' FROM inserted -- INSERTED IS VIRTUAL TABLE 
+END
+
+SAVE_UPDATE_DATA 'I','NITIN','NITIN@GMAIL.COM','abcd123'
+SAVE_UPDATE_DATA 'I','JATIN','JATIN@GMAIL.COM','ja12'
+
+
+SAVE_UPDATE_DATA 'U','NITIN','NITIN@GMAIL.COM','ABX'
+
+SAVE_UPDATE_DATA 'U','NITIN','NITIN@GMAIL.COM','abcd123'
+
+
+ALTER PROC SAVE_UPDATE_DATA
+(
+@ACTION_TTYPE  CHAR(1),
+@NAME VARCHAR(100),
+@EMAIL VARCHAR(100),
+@PWD VARCHAR(40)
+)
+AS
+BEGIN
+			IF(@ACTION_TTYPE ='I')
+			BEGIN
+					INSERT INTO USERS(NAME,EMAIL,PWD)
+					VALUES(@NAME,@EMAIL,@PWD)  
+			END
+			ELSE IF(@ACTION_TTYPE ='U') 
+
+			AND NOT EXISTS(
+						SELECT * FROM 
+										(SELECT TOP 3 PWD 
+										FROM USERS_LOG 
+										WHERE EMAIL = @EMAIL ORDER BY DATE_TIME DESC
+										) a
+								WHERE PWD = @PWD
+
+
+			)
+
+			BEGIN
+					UPDATE USERS
+					SET PWD = @PWD
+					WHERE EMAIL = @EMAIL
+			END
+			ELSE IF @ACTION_TTYPE ='U'
+			BEGIN
+					SELECT 'PASSWORD CANNOT BE CHANGED, SINCE MATCHED IN LAST THREE' AS MSG
+			END
+
+			
+END
+
+
+
+--------------
+--VIEW : IS VIRTUAL TABLE WHICH CAN BE USE AS A PHYSICAL TABLE
+---
+CREATE VIEW V_GET
+AS
+SELECT ID,NAME,EMAIL  FROM USERS
+
+
+
+CREATE VIEW E_SAL
+AS
+SELECT J.eid,J.name,J.gender,J.email,S.sal 
+FROM j_employee J INNER JOIN j_salary S
+	ON J.EID  = S.id
+
+
+
+
+
+
+
+
+SELECT * FROM V_GET
+
+SELECT *,dbo.addnum(eid,sal), left(name,2) FROM E_SAL
+
+select * from E_SAL
+
+
+-------- FUNCTION 
+CREATE FUNCTION dbo.addnum
+(
+@n1 int,
+@n2 int
+)
+returns int
+as
+begin
+			declare @n as int
+
+			set @n = @n1 +@n2 
+			return @n 
+end
+
+/*
+index : to store data in sorted order , so data reader coammand can run faster
+Types of index:
+-cluster index:  Physically sorted
+				- primary key is culster index
+-non cluster   : virtually sorted
+*/
+
+create index ix_ab on users
+(
+	name
+)
+
+select * from users where name ='nitin'
+
+
+
+
