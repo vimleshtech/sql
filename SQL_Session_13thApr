@@ -1,0 +1,102 @@
+SQL Server Type
+=======================
+-Database Engine			
+
+	MS BI 
+-IS/SSIS (SQL Server Integration Services) / is also known as ETL(extract transformation load) Tool 
+-RS/SSRS (SQL Server Reporting Services)
+-AS/SSAS (SQL Serverr Analysis Services) / OLAP , MLOAP , HLOAP  , OLTP  
+		-Data Warehouse 
+
+Other Concepts
+================================
+
+MS Azure  : is cloud 
+
+BigData
+----------------------
+V3 : Volume, Velocity, Varity ( Structured data , semi-structured, non-structured)
+				 tables               json,		images
+						      xml		moviews
+						     csv 		songs 
+
+
+==================================
+
+Server Edition
+===================================
+	Express		: free  (u will get sql agent, 10GB limit per DB)
+	Standard	: Paid  (DB Server) 	
+	Enterprise	: Paid  (DB Server, IS, RS, AS)
+			: will contains tools (ssms, data tools/BIDS - Business Inte. Development Studio)
+	
+
+Client Edition:
+======================
+SSMS : SQL Server Management Studio
+Developer : 
+	  SSMS
+	  DataTool  (SQL version >=2012) or BIDS 
+
+SSDT:  SQL Server Data Tools
+	
+
+
+Other:
+	PowerBI 		
+	
+
+Version
+=============================================
+MS SQL Server 2000 : DB
+MS SQL Server 2005 :        **
+		   DB, DTS (Data Transformation Services)
+				.dts
+
+
+MS SQL Server 2008
+
+MS SQL Server 2008R2	:    **
+				DB
+			        BIDS : SSIS , SSRS, SSAS	
+
+MS SQL Server 2012	     **	
+				DB
+				Data Tools( SSIS, SSRS, SSAS0
+
+MS SQL Server 2014
+
+
+MS SQL Server 2016          **
+
+MS SQL Server 2017
+
+
+File System and Extension
+===================================
+	.mdf 	(default)
+	.ldf    (default)
+	.ndf 	(seconday)
+Services
+====================================
+
+	-Stop - start
+	-Pause - resume
+	-Enable TCP			: yes 
+	-Add Inbould Rule of cross system access : Add Port 
+
+Authentication Type
+======================
+	-SQL Server
+		Credential/Enforce  Policy:
+		-Password Length
+		-Expire  time
+		-Change password on first login 
+			
+	-Windows 
+			 
+	
+
+
+
+	 
